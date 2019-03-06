@@ -1,9 +1,6 @@
 package com.example.nexor.myapplication;
 
 import android.content.Context;
-import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -14,10 +11,16 @@ import android.view.View;
 import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ToggleButton;
 
 public class MyKeyboard extends LinearLayout implements View.OnClickListener {
 
-    private Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button0, buttonDelete, buttonEnter;
+    private Button buttonEscape;
+    private Button buttonEnter;
+    private Button buttonCtrl;
+    private Button buttonAlt;
+    private Button buttonSuper;
+    private Button buttonTab;
     private SparseArray<String> keyValues = new SparseArray<>();
     private InputConnection inputConnection;
     private OnClickListener ock;
@@ -37,42 +40,18 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
 
     public void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.keyboard, this, true);
-        button1 = (Button) findViewById(R.id.button_1);
-        button1.setOnClickListener(this);
-        button2 = (Button) findViewById(R.id.button_2);
-        button2.setOnClickListener(this);
-        button3 = (Button) findViewById(R.id.button_3);
-        button3.setOnClickListener(this);
-        button4 = (Button) findViewById(R.id.button_4);
-        button4.setOnClickListener(this);
-        button5 = (Button) findViewById(R.id.button_5);
-        button5.setOnClickListener(this);
-        button6 = (Button) findViewById(R.id.button_6);
-        button6.setOnClickListener(this);
-        button7 = (Button) findViewById(R.id.button_7);
-        button7.setOnClickListener(this);
-        button8 = (Button) findViewById(R.id.button_8);
-        button8.setOnClickListener(this);
-        button9 = (Button) findViewById(R.id.button_9);
-        button9.setOnClickListener(this);
-        button0 = (Button) findViewById(R.id.button_0);
-        button0.setOnClickListener(this);
-        buttonDelete = (Button) findViewById(R.id.button_delete);
-        buttonDelete.setOnClickListener(this);
+        buttonEscape = (Button) findViewById(R.id.button_escape);
+        buttonEscape.setOnClickListener(this);
+        buttonCtrl = (Button) findViewById(R.id.button_ctrl);
+        buttonCtrl.setOnClickListener(this);
+        buttonSuper = (Button) findViewById(R.id.button_super);
+        buttonSuper.setOnClickListener(this);
+        buttonAlt = (Button) findViewById(R.id.button_alt);
+        buttonAlt.setOnClickListener(this);
         buttonEnter = (Button) findViewById(R.id.button_enter);
         buttonEnter.setOnClickListener(this);
-
-
-        keyValues.put(R.id.button_1, "1");
-        keyValues.put(R.id.button_2, "2");
-        keyValues.put(R.id.button_3, "3");
-        keyValues.put(R.id.button_4, "4");
-        keyValues.put(R.id.button_5, "5");
-        keyValues.put(R.id.button_6, "6");
-        keyValues.put(R.id.button_7, "7");
-        keyValues.put(R.id.button_8, "8");
-        keyValues.put(R.id.button_9, "9");
-        keyValues.put(R.id.button_0, "0");
+        buttonTab = (Button) findViewById(R.id.button_tab);
+        buttonTab.setOnClickListener(this);
         keyValues.put(R.id.button_enter, "\n");
     }
 
@@ -87,7 +66,7 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
         if (inputConnection == null) {
             return;
         }
-        if (getRootView().getId() == R.id.button_delete) {
+        if (getRootView().getId() == R.id.button_escape) {
             CharSequence selectedText = inputConnection.getSelectedText(0);
             if (TextUtils.isEmpty(selectedText)) {
                 inputConnection.deleteSurroundingText(1, 0);
@@ -99,7 +78,6 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
             if (value != null)
                 inputConnection.commitText(value, 1);
         }
-        Log.e("kek", ""+ v.getId());
         if (ock != null) {
             ock.onClick(v);
         }

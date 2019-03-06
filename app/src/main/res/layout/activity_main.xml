@@ -31,17 +31,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:background="#ffff00"
+        android:background="#1e1e1e"
         android:inputType="text"
         android:padding="5dp"
         />
 
     <com.example.nexor.myapplication.MyKeyboard
         android:id="@+id/keyboard"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        />
+        android:layout_alignParentBottom="true" />
 
 </android.support.v4.widget.DrawerLayout>
