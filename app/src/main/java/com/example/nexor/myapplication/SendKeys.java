@@ -31,8 +31,13 @@ public class SendKeys extends AsyncTask<Object, Void, Void> {
         {
             put("∅", "Escape");
             put("⏎", "Return");
-            put("Ϡ", "Super_L");
             put(" ", "KP_Space");
+            put("←", "KP_Left");
+            put("↓", "KP_Down");
+            put("↑", "KP_Up");
+            put("→", "KP_Right");
+            put("⊞", "Super_L");
+            put("↹", "Tab");
         }
     };
 
