@@ -16,6 +16,7 @@ import android.text.InputType;
 import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -49,6 +50,13 @@ public class MainActivity extends AppCompatActivity
         final EditText editText = findViewById(R.id.editText);
         MyKeyboard keyboard = findViewById(R.id.keyboard);
         editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        editText.setOnDragListener(new View.OnDragListener() {
+//            @Override
+//            public boolean onDrag(View v, DragEvent event) {
+//                event.g
+//                return false;
+//            }
+//        });
         editText.setOnTouchListener(new View.OnTouchListener() {
             private float l_x = -1;
             private float l_y = -1;
@@ -67,14 +75,13 @@ public class MainActivity extends AppCompatActivity
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        if (firstTouch && (System.currentTimeMillis() - time) <= 300) {
-                            new SendKeys().execute("click --repeat 2 1");
+                        if (firstTouch && (System.currentTimeMillis() - time) < 300) {
+                            new SendKeys().execute("click 1");
+//                            new SendKeys().execute("click --repeat 2 1");
                             firstTouch = false;
                         } else {
-                            new SendKeys().execute("click 1");
                             firstTouch = true;
                             time = System.currentTimeMillis();
-                            return false;
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:

@@ -16,9 +16,7 @@ import java.util.Map;
 public class SendKeys extends AsyncTask<Object, Void, Void> {
 
     private static Socket s;
-    private boolean mod_ctrl = false;
-    private boolean mod_shift = false;
-    private boolean mod_super = false;
+    private boolean mod_ctrl, mod_shift, mod_super = false;
     private static HashMap<String, Boolean> MODIFIERS = new HashMap<String, Boolean>() {
         {
             put("Ctrl", false);
@@ -38,6 +36,9 @@ public class SendKeys extends AsyncTask<Object, Void, Void> {
             put("→", "KP_Right");
             put("⊞", "Super_L");
             put("↹", "Tab");
+            put("↖", "click 1");
+            put("↗", "click 3");
+
         }
     };
 
@@ -136,9 +137,14 @@ public class SendKeys extends AsyncTask<Object, Void, Void> {
 
         if (s != null) {
             try {
+//                int b;
+//                while((b=s.getInputStream().read()) == 1);
+//                Log.e("kekinzin", b+"");
                 tcp(s, os);
             } catch (NullPointerException e) {
                 connect();
+//            } catch (IOException e) {
+//                e.printStackTrace();
             }
         }
         return null;
@@ -168,7 +174,7 @@ public class SendKeys extends AsyncTask<Object, Void, Void> {
                         MODIFIERS.put(mod, false);
                     }
                 }
-                if(!raw_in.contains("click") && !raw_in.startsWith("x:")) {
+                if (!raw_in.contains("click") && !raw_in.startsWith("x:")) {
                     treated = "key " + treated;
                 }
                 if (treated.equals("key alt+tab")) {

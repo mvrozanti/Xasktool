@@ -25,6 +25,8 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
     private Button buttonDown;
     private Button buttonUp;
     private Button buttonRight;
+    private Button buttonMbLeft;
+    private Button buttonMbRight;
     private SparseArray<String> keyValues = new SparseArray<>();
     private InputConnection inputConnection;
     private OnClickListener ock;
@@ -64,6 +66,10 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
         buttonUp.setOnClickListener(this);
         buttonRight = (Button) findViewById(R.id.button_right);
         buttonRight.setOnClickListener(this);
+        buttonMbLeft = (Button) findViewById(R.id.button_mb_left);
+        buttonMbLeft.setOnClickListener(this);
+        buttonMbRight = (Button) findViewById(R.id.button_mb_right);
+        buttonMbRight.setOnClickListener(this);
         keyValues.put(R.id.button_enter, "\n");
     }
 
